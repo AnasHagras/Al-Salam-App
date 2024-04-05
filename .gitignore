@@ -1,0 +1,16 @@
+# Ignore compiled Python files
+*.pyc
+
+# Ignore Django migration files
+**/migrations/*.py
+**/migrations/*.pyc
+
+# Ignore the virtual environment
+venv/
+
+# Ignore media and static files
+/media/
+/static/
+
+# Ignore .env files
+.env
