@@ -8,13 +8,13 @@ from .models import User
 
 class UserAdmin(BaseUserAdmin):
     ordering = ["id"]
-    list_display = ["phone_number", "name"]
+    list_display = ["phone_number", "name","email","profile_picture","user_type"]
     fieldsets = (
-        (None, {"fields": ("phone_number", "user_type")}),
+        (None, {"fields": ("phone_number", "user_type","profile_picture","email")}),
         ("Personal Info", {"fields": ("name",)}),
         ("Permissions", {"fields": ("is_active", "is_staff", "is_superuser")}),
     )
-    add_fieldsets = ((None, {"classes": ("wide",), "fields": ("phone_number", "password1", "password2")}),)
+    add_fieldsets = ((None, {"classes": ("wide",), "fields": ("phone_number", "password1", "password2","email")}),)
 
 
 admin.site.register(User, UserAdmin)

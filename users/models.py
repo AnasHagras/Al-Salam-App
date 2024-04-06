@@ -41,12 +41,13 @@ class User(AbstractBaseUser, PermissionsMixin):
         ADMIN = "ADMIN", "Admin"
 
     phone_number = models.CharField(max_length=255, unique=True)
+    email = models.EmailField(max_length=255, blank=True, null=True)
     name = models.CharField(max_length=255, blank=True, null=True)
     user_type = models.CharField(max_length=20, choices=UserType.choices, default=UserType.CUSTOMER)
     is_active = models.BooleanField(default=True)
     is_staff = models.BooleanField(default=False)
 
-    profile_picture = models.ImageField(upload_to="media/profile_pictures/", null=True, blank=True)
+    profile_picture = models.ImageField(upload_to="profile_pictures/", null=True, blank=True)
 
     objects = UserManager()
     USERNAME_FIELD = "phone_number"
