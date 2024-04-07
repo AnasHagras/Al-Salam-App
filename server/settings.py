@@ -13,6 +13,7 @@ https://docs.djangoproject.com/en/5.0/ref/settings/
 from pathlib import Path
 from decouple import config
 import os
+from django.utils.translation import gettext_lazy as _
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -27,8 +28,26 @@ SECRET_KEY = config("SECRET_KEY")
 
 ALLOWED_HOSTS = []
 
+LANGUAGE_CODE = "ar"
 
-# Application definition
+TIME_ZONE = "UTC"
+
+USE_TZ = True
+
+TIME_ZONE = "Asia/Riyadh"
+# 0220374903
+USE_I18N = True
+USE_L10N = True
+
+LANGUAGES = [
+    ("ar", _("Arabic")),
+    ("en", _("English")),
+    ("es", _("Spanish")),
+]
+
+LOCALE_PATHS = [
+    os.path.join(BASE_DIR, "locale"),
+]
 
 INSTALLED_APPS = [
     "django.contrib.admin",
@@ -39,16 +58,20 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
     "users",
     "rest_framework",
+    "application",
+    "dashboard",
 ]
 
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
+    "django.middleware.locale.LocaleMiddleware",
     "django.middleware.common.CommonMiddleware",
     "django.middleware.csrf.CsrfViewMiddleware",
     "django.contrib.auth.middleware.AuthenticationMiddleware",
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
+    # "middlewares.LanguageMiddleware.SetLanguageMiddleware",
 ]
 
 ROOT_URLCONF = "server.urls"
@@ -109,17 +132,6 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-
-# Internationalization
-# https://docs.djangoproject.com/en/5.0/topics/i18n/
-
-LANGUAGE_CODE = "en-us"
-
-TIME_ZONE = "UTC"
-
-USE_I18N = True
-
-USE_TZ = True
 
 MEDIA_URL = "api/v1/media/"
 MEDIA_ROOT = os.path.join(BASE_DIR, "media")
