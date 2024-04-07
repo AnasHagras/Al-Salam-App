@@ -58,6 +58,7 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
     "users",
     "rest_framework",
+    "knox",
     "application",
     "dashboard",
 ]
@@ -113,6 +114,11 @@ DATABASES = {
     },
 }
 
+# Django REST Framework settings
+REST_FRAMEWORK = {
+    "DEFAULT_AUTHENTICATION_CLASSES": ("knox.auth.TokenAuthentication",),
+    "DEFAULT_PERMISSION_CLASSES": ("rest_framework.permissions.IsAuthenticated",),
+}
 
 # Password validation
 # https://docs.djangoproject.com/en/5.0/ref/settings/#auth-password-validators
