@@ -6,6 +6,7 @@ from rest_framework.validators import UniqueValidator
 from users.models import User
 from django.contrib.auth import authenticate, login
 from knox.models import AuthToken
+from .models import LoginOTP
 
 
 class RegisterSerializer(serializers.ModelSerializer):
@@ -72,8 +73,37 @@ class LoginSerializer(serializers.Serializer):
         attrs["user"] = user
         return attrs
 
+
+class LoginOTPSerializer(serializers.Serializer):
+    phone_number = serializers.CharField(required=True)
+    otp = serializers.CharField(required=True)
+
+    def validate(self, attrs):
+        phone_number = attrs.get("phone_number")
+        otp = attrs.get("otp")
+        user = None
+        if not phone_number or not otp:
+            msg = _("Both phone number and OTP are required.")
+            raise serializers.ValidationError(msg, code="authorization")
+        otp_obj = LoginOTP.objects.filter(user__phone_number=phone_number, otp=otp).last()
+        if not otp_obj:
+            msg = _("OTP not found.")
+            raise serializers.ValidationError(msg, code="authorization")
+        if otp_obj.is_expired:
+            otp_obj.delete()
+            msg = _("OTP has expired.")
+            raise serializers.ValidationError(msg, code="authorization")
+        if otp_obj.otp != otp:
+            msg = _("Invalid OTP.")
+            raise serializers.ValidationError(msg, code="authorization")
+        user = User.objects.get(phone_number=phone_number)
+        attrs["otp_obj"] = otp_obj
+        attrs["user"] = user
+        return attrs
+
     def login(self):
         user = self.validated_data["user"]
         token = AuthToken.objects.create(user)
         login(self.context.get("request"), user)
-        return user, token
+        self.validated_data["otp_obj"].delete()
+        return user, token[1]

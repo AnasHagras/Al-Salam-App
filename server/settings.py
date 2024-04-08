@@ -30,11 +30,11 @@ ALLOWED_HOSTS = []
 
 LANGUAGE_CODE = "ar"
 
-TIME_ZONE = "UTC"
+# TIME_ZONE = "UTC"
 
-USE_TZ = True
 
 TIME_ZONE = "Asia/Riyadh"
+USE_TZ = True
 # 0220374903
 USE_I18N = True
 USE_L10N = True
@@ -61,6 +61,7 @@ INSTALLED_APPS = [
     "knox",
     "application",
     "dashboard",
+    "authentication",
 ]
 
 MIDDLEWARE = [

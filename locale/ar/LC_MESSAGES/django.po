@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-04-07 21:23+0200\n"
+"POT-Creation-Date: 2024-04-08 22:04+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -19,9 +19,41 @@ msgstr ""
 "Plural-Forms: nplurals=6; plural=n==0 ? 0 : n==1 ? 1 : n==2 ? 2 : n%100>=3 "
 "&& n%100<=10 ? 3 : n%100>=11 && n%100<=99 ? 4 : 5;\n"
 
-#: .\dashboard\views.py:11
-msgid "total_customers"
-msgstr "اجمالي المستخدمين"
+#: .\authentication\serializers.py:49
+msgid "phone_number"
+msgstr "رقم الهاتف"
+
+#: .\authentication\serializers.py:52
+msgid "Password"
+msgstr "كلمة المرور"
+
+#: .\authentication\serializers.py:66
+msgid "Unable to log in with provided credentials."
+msgstr "غير قادر على تسجيل الدخول بالبيانات المقدمة"
+
+#: .\authentication\serializers.py:70
+msgid "Must include \"phone_number\" and \"password\"."
+msgstr "كلا من رقم الهاتف وكلمة المرور مطلوبان"
+
+#: .\authentication\serializers.py:86
+msgid "Both phone number and OTP are required."
+msgstr "كلا من رقم الهاتف ورمز التحقق مطلوبان"
+
+#: .\authentication\serializers.py:90
+msgid "OTP not found."
+msgstr "لم يتم العثور على رمز التحقق"
+
+#: .\authentication\serializers.py:94
+msgid "OTP has expired."
+msgstr "انتهت صلاحية رمز التحقق"
+
+#: .\authentication\serializers.py:97
+msgid "Invalid OTP."
+msgstr "رمز التحقق غير صالح"
+
+#: .\authentication\views.py:40
+msgid "OTP has been successfully sent to your mobile number."
+msgstr "تم ارسال رمز التحقق بنجاح الى رقم هاتفك المحمول"
 
 #: .\server\settings.py:43
 msgid "Arabic"
@@ -39,3 +71,6 @@ msgstr "الأسبانية"
 #, python-brace-format
 msgid "Hello, {name} World!!!!"
 msgstr ".{name} مرحبا بك"
+
+#~ msgid "total_customers"
+#~ msgstr "اجمالي المستخدمين"
