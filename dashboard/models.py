@@ -26,3 +26,25 @@ class Company(models.Model):
 
     def __str__(self):
         return self.name
+
+
+class Slider(models.Model):
+    class CategoryChoices(models.TextChoices):
+        HOME = "home", "Home"
+        ABOUT = "about", "About"
+
+    title = models.CharField(max_length=256, blank=True, null=True)
+    description = models.TextField(blank=True, null=True)
+    category = models.CharField(
+        max_length=256, blank=True, null=True, choices=CategoryChoices.choices, default=CategoryChoices.HOME
+    )
+    link = models.CharField(max_length=256, blank=True, null=True)
+
+    def get_image_upload_path(instance, filename):
+        # Constructing the upload path based on category
+        return f"slider/{instance.category}/{filename}"
+
+    image = models.ImageField(upload_to=get_image_upload_path, blank=True, null=True)
+
+    def __str__(self):
+        return self.title

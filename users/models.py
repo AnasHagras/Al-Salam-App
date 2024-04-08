@@ -52,6 +52,9 @@ class User(AbstractBaseUser, PermissionsMixin):
     objects = UserManager()
     USERNAME_FIELD = "phone_number"
 
+    class Meta:
+        ordering = ["id"]
+
     # if user changed from customer to admin or vice versa handle its is_staff and is_superuser
     def save(self, *args, **kwargs):
         if self.user_type == self.UserType.ADMIN:
@@ -61,3 +64,6 @@ class User(AbstractBaseUser, PermissionsMixin):
             self.is_staff = False
             self.is_superuser = False
         super().save(*args, **kwargs)
+
+    def __str__(self):
+        return self.phone_number
