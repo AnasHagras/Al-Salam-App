@@ -48,3 +48,22 @@ class Slider(models.Model):
 
     def __str__(self):
         return self.title
+
+
+class Country(models.Model):
+    name_ar = models.CharField(max_length=256, blank=True, null=True)
+    name_en = models.CharField(max_length=256, blank=True, null=True)
+    # ! See it later (how can be done)
+    code = models.CharField(max_length=256, blank=True, null=True)
+
+    def __str__(self):
+        return self.name_ar
+
+
+class City(models.Model):
+    name_ar = models.CharField(max_length=256, blank=True, null=True)
+    name_en = models.CharField(max_length=256, blank=True, null=True)
+    country = models.ForeignKey(Country, on_delete=models.CASCADE, blank=True, null=True)
+
+    def __str__(self):
+        return self.name_ar

@@ -23,10 +23,11 @@ from django.conf.urls.i18n import i18n_patterns
 
 urlpatterns = [
     path("admin/", admin.site.urls),
-    path("api/v1/", include("users.urls")),
+    path("api/v1/users/", include("users.urls")),
     path("api/v1/dashboard/", include("dashboard.urls")),
     path("api/v1/app/", include("application.urls")),
     path("api/v1/auth/", include("authentication.urls")),
+    path("api/v1/products/", include("products.urls")),
 ]
 
 # add static and media to urls
