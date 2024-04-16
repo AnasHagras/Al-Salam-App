@@ -67,3 +67,16 @@ class City(models.Model):
 
     def __str__(self):
         return self.name_ar
+
+
+class ContactUsMessage(models.Model):
+    name = models.CharField(max_length=256, blank=True, null=True)
+    email = models.EmailField()
+    phone = models.CharField(max_length=256)
+    message = models.TextField(blank=True, null=True)
+
+    def __str__(self):
+        return self.name
+
+    class Meta:
+        ordering = ["-id"]

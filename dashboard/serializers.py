@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import Company, Slider, Country, City
+from .models import Company, Slider, Country, City, ContactUsMessage
 
 
 class CompanySerializer(serializers.ModelSerializer):
@@ -27,4 +27,11 @@ class CitySerializer(serializers.ModelSerializer):
 
     class Meta:
         model = City
+        fields = "__all__"
+
+
+class ContactUsMessageSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = ContactUsMessage
         fields = "__all__"

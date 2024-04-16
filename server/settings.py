@@ -14,6 +14,7 @@ from pathlib import Path
 from decouple import config
 import os
 from django.utils.translation import gettext_lazy as _
+from datetime import timedelta
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -160,3 +161,12 @@ AUTH_USER_MODEL = "users.User"
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
+
+REST_KNOX = {
+    "SECURE_HASH_ALGORITHM": "cryptography.hazmat.primitives.hashes.SHA512",
+    "AUTH_TOKEN_CHARACTER_LENGTH": 64,
+    "TOKEN_TTL": timedelta(days=7),
+    "USER_SERIALIZER": "knox.serializers.UserSerializer",
+    "TOKEN_LIMIT_PER_USER": None,
+    "AUTO_REFRESH": False,
+}

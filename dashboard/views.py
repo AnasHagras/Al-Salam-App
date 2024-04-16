@@ -12,6 +12,8 @@ from rest_framework.viewsets import ModelViewSet
 from utils.pagination import CustomNumberPagination
 from users.serializers import UserSerializer
 from utils.permissions import IsAdminUser
+from .models import ContactUsMessage
+from .serializers import ContactUsMessageSerializer
 
 
 class DashboardStatsView(APIView):
@@ -113,3 +115,16 @@ class CityViewSet(ModelViewSet):
 
     class Meta:
         ordering = ["id"]
+
+
+class ContactUsMessageViewSet(ModelViewSet):
+    queryset = ContactUsMessage.objects.all()
+    serializer_class = ContactUsMessageSerializer
+    permission_classes = [permissions.IsAuthenticated]
+    authentication_classes = [TokenAuthentication]
+    http_method_names = ["get", "post"]
+
+    # def get_permissions(self):
+    #     if self.request.method in ["POST"]:
+    #         self.permission_classes = [permissions.IsAuthenticated]
+    #     return super().get_permissions()
